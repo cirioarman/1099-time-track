@@ -1,0 +1,59 @@
+{
+  "name": "Category",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the category"
+    },
+    "key": {
+      "type": "string",
+      "description": "Unique identifier key for the category"
+    },
+    "hourly_rate": {
+      "type": "number",
+      "description": "Employee pay rate for this category"
+    },
+    "billing_rate": {
+      "type": "number",
+      "description": "School billing rate for this category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what work falls under this category"
+    },
+    "color": {
+      "type": "string",
+      "description": "Color code for visual identification"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this category is currently available for selection"
+    }
+  },
+  "required": [
+    "name",
+    "key",
+    "hourly_rate",
+    "billing_rate"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": null,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

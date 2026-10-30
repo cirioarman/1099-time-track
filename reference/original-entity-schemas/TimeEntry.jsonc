@@ -1,0 +1,168 @@
+{
+  "name": "TimeEntry",
+  "type": "object",
+  "properties": {
+    "contractor_name": {
+      "type": "string",
+      "description": "Name of the contractor"
+    },
+    "school_or_district": {
+      "type": "string",
+      "description": "School or district the contractor was working for"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "in_school_instruction",
+        "at_home_preparation",
+        "administrative_tasks",
+        "travel",
+        "meetings"
+      ],
+      "description": "Type of work being performed"
+    },
+    "sub_category_key": {
+      "type": "string",
+      "description": "Key for the selected sub-category"
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the work session started"
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the work session ended"
+    },
+    "duration_hours": {
+      "type": "number",
+      "description": "Total hours worked in decimal format"
+    },
+    "billable_hours": {
+      "type": "number",
+      "description": "Billable hours rounded to 15-minute increments"
+    },
+    "hourly_rate": {
+      "type": "number",
+      "description": "Employee pay rate for this entry"
+    },
+    "billing_rate": {
+      "type": "number",
+      "description": "School billing rate for this entry"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description of work performed"
+    },
+    "mileage_miles": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Miles driven for this entry (travel), if any"
+    },
+    "mileage_reimbursement": {
+      "type": "number",
+      "description": "Mileage reimbursement for this entry (miles x rate at entry time)"
+    },
+    "is_manual_entry": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this was manually entered or timer-tracked"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "completed"
+      ],
+      "default": "completed",
+      "description": "Status of the time entry"
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "denied"
+      ],
+      "default": "pending",
+      "description": "Approval status from school"
+    },
+    "denial_reason": {
+      "type": "string",
+      "description": "Reason provided by school for denying the entry"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "unpaid",
+        "paid"
+      ],
+      "default": "unpaid",
+      "description": "Payment status tracked by admin"
+    }
+  },
+  "required": [
+    "contractor_name",
+    "school_or_district",
+    "category",
+    "start_time",
+    "duration_hours"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.school_or_district": "{{user.data.school_name}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.school_or_district": "{{user.data.school_name}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

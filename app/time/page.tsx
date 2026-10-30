@@ -1,0 +1,2 @@
+import Shell from '@/components/Shell';import TimeForm from '@/components/TimeForm';import {currentUser} from '@/lib/auth';import {redirect} from 'next/navigation';
+export default async function Page(){const u=await currentUser();if(u?.role==='SCHOOL')redirect('/entries');return <Shell><div className="hero"><div className="eyebrow">Contractor workspace</div><h1>Record work session</h1><p className="muted">Billable hours round up to the next 15-minute increment. Rates are captured at submission.</p></div><TimeForm/></Shell>}

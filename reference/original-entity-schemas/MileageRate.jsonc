@@ -1,0 +1,37 @@
+{
+  "name": "MileageRate",
+  "type": "object",
+  "properties": {
+    "rate_per_mile": {
+      "type": "number",
+      "minimum": 0,
+      "default": 0.76,
+      "description": "Current mileage reimbursement rate per mile in USD"
+    },
+    "updated_note": {
+      "type": "string",
+      "description": "Optional note about the last rate change"
+    }
+  },
+  "required": [
+    "rate_per_mile"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

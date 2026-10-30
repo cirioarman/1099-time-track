@@ -1,0 +1,102 @@
+{
+  "name": "RetainerContractor",
+  "type": "object",
+  "properties": {
+    "contractor_name": {
+      "type": "string",
+      "description": "Full name of the contractor"
+    },
+    "school_or_district": {
+      "type": "string",
+      "description": "School or district this contractor works for"
+    },
+    "monthly_amount": {
+      "type": "number",
+      "description": "Monthly retainer amount paid to the contractor"
+    },
+    "billing_amount": {
+      "type": "number",
+      "description": "Monthly amount billed to the school"
+    },
+    "school_allocations": {
+      "type": "array",
+      "description": "Monthly retainer amount split across schools or districts",
+      "items": {
+        "type": "object",
+        "properties": {
+          "school_or_district": {
+            "type": "string",
+            "description": "School or district being billed a share of the retainer"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Monthly dollar amount allocated to this school or district"
+          }
+        }
+      }
+    },
+    "allocation_markup_percent": {
+      "type": "number",
+      "minimum": 0,
+      "default": 0,
+      "description": "Percentage markup added to each school allocation for profit"
+    },
+    "pay_frequency": {
+      "type": "string",
+      "enum": [
+        "monthly",
+        "bi_monthly",
+        "quarterly"
+      ],
+      "default": "monthly",
+      "description": "How often the contractor is paid"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the retainer started"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the retainer ends (leave blank if ongoing)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional notes about the retainer arrangement"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this retainer is currently active"
+    }
+  },
+  "required": [
+    "contractor_name",
+    "school_or_district",
+    "monthly_amount",
+    "start_date"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

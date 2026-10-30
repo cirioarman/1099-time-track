@@ -1,0 +1,41 @@
+{
+  "name": "SubCategory",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the sub-category"
+    },
+    "key": {
+      "type": "string",
+      "description": "Unique identifier key for the sub-category"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this sub-category is currently available for selection"
+    }
+  },
+  "required": [
+    "name",
+    "key"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": null,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

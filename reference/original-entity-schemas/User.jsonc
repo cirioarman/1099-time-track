@@ -1,0 +1,45 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "display_name": {
+      "type": "string",
+      "description": "Custom display name for the user that can be edited by admins"
+    },
+    "job_title": {
+      "type": "string",
+      "description": "The user's specific job title or custom role within the organization (e.g., 'Instruction', 'Admin')."
+    },
+    "user_type": {
+      "type": "string",
+      "enum": [
+        "contractor",
+        "school"
+      ],
+      "description": "Type of user account - contractor for regular users/contractors, school for school administrators"
+    },
+    "school_name": {
+      "type": "string",
+      "description": "Name of the school (only for school type users)"
+    }
+  },
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  },
+  "required": [
+    "display_name",
+    "job_title"
+  ]
+}

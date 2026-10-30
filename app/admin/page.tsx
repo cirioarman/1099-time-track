@@ -1,0 +1,2 @@
+import Shell from '@/components/Shell';import {currentUser} from '@/lib/auth';import {redirect} from 'next/navigation';import AdminPanel from '@/components/AdminPanel';
+export default async function Page(){const u=await currentUser();if(u?.role!=='ADMIN')redirect('/dashboard');return <Shell><div className="hero"><div className="eyebrow">Administration</div><h1>Operations settings</h1><p className="muted">Manage schools, categories, mileage and contract records.</p></div><AdminPanel/></Shell>}

@@ -1,0 +1,65 @@
+{
+  "name": "FixedRevenueContract",
+  "type": "object",
+  "properties": {
+    "contract_name": {
+      "type": "string",
+      "description": "Name of the fixed revenue contract"
+    },
+    "school_or_district": {
+      "type": "string",
+      "description": "School or district this contract is associated with"
+    },
+    "monthly_revenue": {
+      "type": "number",
+      "description": "Fixed monthly revenue amount from this contract"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the contract started"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the contract ends (leave blank if ongoing)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional notes about this contract"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this contract is currently active"
+    }
+  },
+  "required": [
+    "contract_name",
+    "school_or_district",
+    "monthly_revenue",
+    "start_date"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

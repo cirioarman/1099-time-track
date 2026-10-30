@@ -1,0 +1,56 @@
+{
+  "name": "School",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the school or district"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this school is currently available for selection"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "school",
+        "district"
+      ],
+      "default": "school",
+      "description": "Type of entity: school or district"
+    },
+    "parent_district_id": {
+      "type": "string",
+      "description": "ID of the parent district if this is a school"
+    },
+    "discount_percentage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0,
+      "description": "Percentage discount offered to this school/district on billing (0-100)"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
